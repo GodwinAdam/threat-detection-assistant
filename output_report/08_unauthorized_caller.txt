@@ -1,0 +1,20 @@
+SCENARIO: 08_unauthorized_caller
+DESCRIPTION: A caller_id not on the configured allow-list — expected to be blocked by access control before validation even runs.
+CALLER_ID: unknown-caller
+CLASSIFICATION: NEGATIVE / BLOCKED (access control)
+ELAPSED: 0.0s
+
+--- INPUT ---
+title: Suspicious PowerShell Command line Execution
+tags:
+    - attack.t1059.001
+detection:
+    selection:
+        Image|endswith: '\powershell.exe'
+    condition: selection
+
+--- OUTCOME ---
+PermissionError
+
+--- ERROR / BLOCK MESSAGE ---
+Caller 'unknown-caller' is not authorized to submit detection rules.

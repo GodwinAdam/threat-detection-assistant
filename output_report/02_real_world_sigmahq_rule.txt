@@ -1,0 +1,104 @@
+SCENARIO: 02_real_world_sigmahq_rule
+DESCRIPTION: A real, public Sigma rule pulled live from github.com/SigmaHQ/sigma (not synthetic).
+CALLER_ID: local-user
+CLASSIFICATION: POSITIVE / LOW RISK (good shape — full declared coverage confirmed)
+ELAPSED: 11.96s
+
+--- INPUT ---
+title: HackTool - Empire PowerShell Launch Parameters
+id: 79f4ede3-402e-41c8-bc3e-ebbf5f162581
+status: test
+description: Detects suspicious powershell command line parameters used in Empire
+references:
+    - https://github.com/EmpireProject/Empire/blob/c2ba61ca8d2031dad0cfc1d5770ba723e8b710db/lib/common/helpers.py#L165
+author: Florian Roth (Nextron Systems)
+date: 2019-04-20
+modified: 2023-02-21
+tags:
+    - attack.execution
+    - attack.t1059.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        CommandLine|contains:
+            - ' -NoP -sta -NonI -W Hidden -Enc '
+            - ' -noP -sta -w 1 -enc '
+            - ' -NoP -NonI -W Hidden -enc '
+            - ' -noP -sta -w 1 -enc'
+            - ' -enc  SQB'
+            - ' -nop -exec bypass -EncodedCommand '
+    condition: selection
+falsepositives:
+    - Other tools that incidentally use the same command line parameters
+level: high
+
+--- OUTCOME ---
+COMPLETED
+
+--- parsed_metadata ---
+{
+  "title": "HackTool - Empire PowerShell Launch Parameters",
+  "status": "test",
+  "tags": [
+    "attack.execution",
+    "attack.t1059.001"
+  ],
+  "detection": {
+    "selection": {
+      "CommandLine|contains": [
+        " -NoP -sta -NonI -W Hidden -Enc ",
+        " -noP -sta -w 1 -enc ",
+        " -NoP -NonI -W Hidden -enc ",
+        " -noP -sta -w 1 -enc",
+        " -enc  SQB",
+        " -nop -exec bypass -EncodedCommand "
+      ]
+    },
+    "condition": "selection"
+  },
+  "status_code": 200
+}
+
+--- final_report ---
+**Threat Detection Coverage Analysis**
+
+**1. Mapped MITRE ATT&CK Technique ID & Name:**
+
+The detection rule is mapped to the following MITRE ATT&CK techniques:
+
+* T1059.001 - PowerShell: Adversaries may use PowerShell to perform actions like command execution and script running, often with encoded or obfuscated command lines to evade detection.
+* T1105 - Ingress Tool Transfer: Adversaries may transfer tools or other files from an external system into a compromised environment to carry out follow-on actions.
+
+**2. Blind spots or evasion techniques attackers could use against this rule:**
+
+Based on the detection rule, attackers could potentially evade detection by:
+
+* Using different PowerShell command line parameters that are not included in the detection rule.
+* Encoding or obfuscating the command line parameters in a way that is not detected by the rule.
+* Using other tools or scripts that perform similar actions to PowerShell, but with different command line parameters.
+* Using anti-debugging or anti-VM techniques to evade detection.
+* Using living-off-the-land (LOTL) techniques, where attackers use legitimate tools and scripts to perform malicious actions.
+
+**3. Actionable recommendations to improve detection coverage:**
+
+To improve detection coverage, consider the following recommendations:
+
+* **Expand the detection rule to include additional PowerShell command line parameters**: Regularly review and update the detection rule to include new and emerging command line parameters used by attackers.
+* **Use more advanced detection techniques**: Consider using machine learning-based detection techniques, such as anomaly detection or behavior-based detection, to identify suspicious PowerShell activity that may not be caught by the current rule.
+* **Monitor for PowerShell execution and script running**: In addition to detecting specific command line parameters, monitor for PowerShell execution and script running in general, as this can indicate malicious activity.
+* **Implement anti-tampering and anti-debugging detection**: Use detection techniques to identify attempts by attackers to evade detection using anti-tampering or anti-debugging techniques.
+* **Use a combination of detection techniques**: Use a combination of signature-based detection, anomaly detection, and behavior-based detection to identify and prevent malicious activity.
+* **Continuously monitor and update the detection rule**: Regularly review and update the detection rule to ensure it remains effective against emerging threats and evasion techniques.
+
+By implementing these recommendations, you can improve the detection coverage of the rule and reduce the risk of missing malicious activity.
+
+--- gap_analysis ---
+{
+  "covered_techniques": [
+    "T1059.001"
+  ],
+  "missing_techniques": [],
+  "coverage_percentage": "100.0%"
+}

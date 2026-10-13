@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-10-13T15:21:56.675783+00:00",
+  "scenarios": [
+    {
+      "name": "01_good_coverage_synthetic",
+      "classification": "POSITIVE / LOW RISK (good shape \u2014 full declared coverage confirmed)",
+      "elapsed_sec": 15.87,
+      "outcome": "COMPLETED"
+    },
+    {
+      "name": "02_real_world_sigmahq_rule",
+      "classification": "POSITIVE / LOW RISK (good shape \u2014 full declared coverage confirmed)",
+      "elapsed_sec": 11.96,
+      "outcome": "COMPLETED"
+    },
+    {
+      "name": "03_partial_coverage_attempt",
+      "classification": "POSITIVE / LOW RISK (good shape \u2014 full declared coverage confirmed)",
+      "elapsed_sec": 13.16,
+      "outcome": "COMPLETED"
+    },
+    {
+      "name": "04_no_tags_declared",
+      "classification": "NO RISK BASELINE (no declared ATT&CK tags to grade against)",
+      "elapsed_sec": 13.77,
+      "outcome": "COMPLETED"
+    },
+    {
+      "name": "05_malformed_yaml",
+      "classification": "NO RISK BASELINE (no declared ATT&CK tags to grade against)",
+      "elapsed_sec": 11.21,
+      "outcome": "COMPLETED"
+    },
+    {
+      "name": "06_prompt_injection_attempt",
+      "classification": "NEGATIVE / BLOCKED (governance \u2014 injection detected)",
+      "elapsed_sec": 0.04,
+      "outcome": "ValueError"
+    },
+    {
+      "name": "07_secrets_in_rule",
+      "classification": "POSITIVE / LOW RISK (good shape \u2014 full declared coverage confirmed)",
+      "elapsed_sec": 11.05,
+      "outcome": "COMPLETED"
+    },
+    {
+      "name": "08_unauthorized_caller",
+      "classification": "NEGATIVE / BLOCKED (access control)",
+      "elapsed_sec": 0.0,
+      "outcome": "PermissionError"
+    },
+    {
+      "name": "09_direct_gap_calc_demo",
+      "classification": "HIGH RISK / GAP FOUND (forced, deterministic demonstration)",
+      "result": {
+        "covered_techniques": [
+          "T1059.001"
+        ],
+        "missing_techniques": [
+          "T1003.001",
+          "T1486"
+        ],
+        "coverage_percentage": "33.33%"
+      }
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+SCENARIO: 05_malformed_yaml
+DESCRIPTION: Invalid YAML — tests that parse failure degrades gracefully instead of crashing the graph.
+CALLER_ID: local-user
+CLASSIFICATION: NO RISK BASELINE (no declared ATT&CK tags to grade against)
+ELAPSED: 11.21s
+
+--- INPUT ---
+title: Broken Rule
+  detection: [this is not valid: yaml: structure
+
+--- OUTCOME ---
+COMPLETED
+
+--- parsed_metadata ---
+{
+  "error": "mapping values are not allowed here\n  in \"<unicode string>\", line 2, column 12:\n      detection: [this is not valid: yaml: stru ... \n               ^",
+  "status_code": 400
+}
+
+--- final_report ---
+Based on the provided detection rule and MITRE ATT&CK Knowledge Base Context, here's the analysis:
+
+**1. Mapped MITRE ATT&CK Technique ID & Name:**
+
+The detection rule is not valid YAML, but based on the context, it appears to be related to PowerShell usage. Therefore, I'll map it to the relevant MITRE ATT&CK technique:
+
+* T1059.001 - PowerShell: Adversaries may use PowerShell to perform actions like command execution and script running, often with encoded or obfuscated command lines to evade detection.
+
+**2. Blind spots or evasion techniques attackers could use against this rule:**
+
+Given the focus on PowerShell usage, attackers might employ the following evasion techniques to avoid detection:
+
+* **Obfuscation**: Using techniques like Base64 encoding, Unicode encoding, or other obfuscation methods to conceal PowerShell commands or scripts.
+* **Encoded command lines**: Using PowerShell's built-in encoding features (e.g., `ConvertTo-String`) to encode command lines, making them harder to detect.
+* **PowerShell version evasion**: Using older or newer versions of PowerShell that are not detected by the rule.
+* **Alternative PowerShell execution**: Using alternative methods to execute PowerShell, such as using the `powershell.exe` process name, but with a modified command line or arguments.
+
+**3. Actionable recommendations to improve detection coverage:**
+
+To enhance detection coverage, consider the following recommendations:
+
+* **Improve YAML validation**: Ensure the detection rule is properly formatted as YAML, and consider using a YAML parser to validate the rule.
+* **Expand PowerShell detection**: Implement additional detection logic to identify PowerShell usage, such as:
+	+ Monitoring PowerShell process creation and command execution.
+	+ Detecting PowerShell-specific registry keys, files, or network connections.
+	+ Analyzing PowerShell command-line arguments and scripts for suspicious activity.
+* **Enhance obfuscation detection**: Implement techniques to detect and decode obfuscated PowerShell commands, such as:
+	+ Using machine learning-based models to identify obfuscated patterns.
+	+ Employing custom rules to detect specific obfuscation techniques.
+* **Monitor PowerShell version and execution**: Continuously monitor PowerShell versions and execution methods to detect potential evasion attempts.
+* **Implement behavioral analysis**: Use behavioral analysis techniques to monitor system and network activity, identifying potential PowerShell-based attacks that may not be detected by the rule.
+
+By implementing these recommendations, you can improve the detection coverage and reduce the likelihood of attackers evading detection using PowerShell-based attacks.
+
+--- gap_analysis ---
+{
+  "covered_techniques": [],
+  "missing_techniques": [],
+  "coverage_percentage": "0.0%"
+}

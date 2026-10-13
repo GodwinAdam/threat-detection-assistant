@@ -1,0 +1,82 @@
+SCENARIO: 03_partial_coverage_attempt
+DESCRIPTION: Rule tagged with two techniques; detection logic only clearly supports one. Reported as actually observed, not forced.
+CALLER_ID: local-user
+CLASSIFICATION: POSITIVE / LOW RISK (good shape — full declared coverage confirmed)
+ELAPSED: 13.16s
+
+--- INPUT ---
+title: Generic Process Injection Alert
+status: experimental
+tags:
+    - attack.t1055
+    - attack.t1003.001
+detection:
+    selection:
+        EventID: 8
+        TargetImage|endswith: '\explorer.exe'
+    condition: selection
+
+--- OUTCOME ---
+COMPLETED
+
+--- parsed_metadata ---
+{
+  "title": "Generic Process Injection Alert",
+  "status": "experimental",
+  "tags": [
+    "attack.t1055",
+    "attack.t1003.001"
+  ],
+  "detection": {
+    "selection": {
+      "EventID": 8,
+      "TargetImage|endswith": "\\explorer.exe"
+    },
+    "condition": "selection"
+  },
+  "status_code": 200
+}
+
+--- final_report ---
+Based on the provided detection rule and MITRE ATT&CK Knowledge Base Context, here's the analysis of the threat detection coverage:
+
+**1. Mapped MITRE ATT&CK Technique ID & Name:**
+
+The detection rule is mapped to the following MITRE ATT&CK Techniques:
+
+* T1055 - Process Injection: Adversaries may inject malicious code into the address space of a separate live process to evade process-based defenses.
+* T1003.001 - Timestomp: Adversaries may modify the timestamp of a file to make it appear as though it was created or modified at a different time.
+
+The rule is specifically designed to detect process injection attacks, which is a subset of the broader T1055 technique.
+
+**2. Blind spots or evasion techniques attackers could use against this rule:**
+
+Based on the rule's design, the following blind spots or evasion techniques could be used by attackers:
+
+* **Process name obfuscation:** Attackers could rename the explorer.exe process to a different name, making it harder for the rule to detect.
+* **Process injection into a different process:** While the rule is designed to detect process injection into explorer.exe, attackers could inject malicious code into a different process, such as a legitimate system process or a process running under a different user context.
+* **Use of legitimate process injection techniques:** Attackers could use legitimate process injection techniques, such as the use of APIs like NtCreateThreadEx, to inject malicious code into a process without triggering the rule.
+* **Evasion through process creation:** Attackers could create a new process with a similar name to explorer.exe, making it harder for the rule to detect the actual process injection.
+
+**3. Actionable recommendations to improve detection coverage:**
+
+To improve detection coverage, consider the following recommendations:
+
+* **Expand the rule to detect process injection into other processes:** Modify the rule to detect process injection into other processes, not just explorer.exe. This can be achieved by adding additional conditions to the rule, such as checking for process injection into other system processes or processes running under a different user context.
+* **Use behavioral analysis:** Implement behavioral analysis to detect suspicious process injection activity, even if it doesn't match the specific conditions in the rule.
+* **Monitor for process name changes:** Monitor for changes to process names, including explorer.exe, to detect potential process name obfuscation attempts.
+* **Use API monitoring:** Monitor API calls, such as NtCreateThreadEx, to detect legitimate process injection techniques being used maliciously.
+* **Implement process creation monitoring:** Monitor process creation to detect potential evasion attempts through process creation.
+* **Consider using machine learning-based detection:** Implement machine learning-based detection to identify patterns and anomalies in process injection activity that may not be caught by traditional rules-based detection.
+
+By implementing these recommendations, you can improve the detection coverage of the rule and reduce the likelihood of attackers evading detection through process injection attacks.
+
+--- gap_analysis ---
+{
+  "covered_techniques": [
+    "T1003.001",
+    "T1055"
+  ],
+  "missing_techniques": [],
+  "coverage_percentage": "100.0%"
+}

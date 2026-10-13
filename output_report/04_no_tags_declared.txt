@@ -1,0 +1,81 @@
+SCENARIO: 04_no_tags_declared
+DESCRIPTION: Rule with no ATT&CK tags at all — nothing for calculate_coverage_gap to grade against.
+CALLER_ID: local-user
+CLASSIFICATION: NO RISK BASELINE (no declared ATT&CK tags to grade against)
+ELAPSED: 13.77s
+
+--- INPUT ---
+title: Generic Network Connection Alert
+status: experimental
+detection:
+    selection:
+        DestinationPort: 4444
+    condition: selection
+
+--- OUTCOME ---
+COMPLETED
+
+--- parsed_metadata ---
+{
+  "title": "Generic Network Connection Alert",
+  "status": "experimental",
+  "tags": [],
+  "detection": {
+    "selection": {
+      "DestinationPort": 4444
+    },
+    "condition": "selection"
+  },
+  "status_code": 200
+}
+
+--- final_report ---
+Based on the provided detection rule and MITRE ATT&CK Knowledge Base Context, here's the analysis of the threat detection coverage:
+
+**1. Mapped MITRE ATT&CK Technique ID & Name:**
+
+The detection rule is triggered when a connection is made to port 4444. This is a common port used by attackers for various malicious activities. Based on the MITRE ATT&CK Knowledge Base Context, the following techniques could be mapped to this detection:
+
+* T1053.005 - Scheduled Task: Adversaries may abuse the Windows Task Scheduler to perform task scheduling for initial or persistent execution of malicious code. Attackers might use port 4444 to communicate with a command and control (C2) server, which could be used to schedule tasks or execute malicious code.
+* T1070.001 - Clear Windows Event Logs: Adversaries may clear Windows Event Logs to hide the activity of an intrusion, removing evidence of their operations. Attackers might use port 4444 to receive instructions or upload stolen data, which could be used to clear Windows Event Logs.
+
+However, the most relevant technique that can be mapped to this detection is:
+
+* T1053.005 - Scheduled Task: Adversaries may abuse the Windows Task Scheduler to perform task scheduling for initial or persistent execution of malicious code.
+
+**2. Blind spots or evasion techniques attackers could use against this rule:**
+
+Attackers could use the following evasion techniques to avoid detection:
+
+* Using a different port: Attackers might use a different port to communicate with the C2 server, making it harder to detect.
+* Using encryption: Attackers might use encryption to conceal the communication, making it harder to detect.
+* Using a proxy: Attackers might use a proxy to hide the IP address and make it harder to detect.
+* Using a legitimate service: Attackers might use a legitimate service to communicate with the C2 server, making it harder to detect.
+
+**3. Actionable recommendations to improve detection coverage:**
+
+To improve detection coverage, the following recommendations can be made:
+
+* **Enrich the detection rule:** Add more conditions to the detection rule, such as:
+	+ Source IP address or domain
+	+ Destination IP address or domain
+	+ Protocol (e.g., TCP, UDP, ICMP)
+	+ Packet contents (e.g., using a regex to match specific keywords)
+* **Use a more specific port:** Instead of detecting connections to port 4444, detect connections to a specific service or application that is known to be used by attackers.
+* **Use behavioral analysis:** Monitor system behavior and detect anomalies that might indicate malicious activity, such as:
+	+ Unusual network activity
+	+ Unusual system calls
+	+ Unusual file access
+* **Use a more advanced detection engine:** Consider using a more advanced detection engine that can detect more complex threats, such as:
+	+ Machine learning-based detection
+	+ Anomaly-based detection
+	+ Predictive analytics-based detection
+
+By implementing these recommendations, the detection coverage can be improved, and the likelihood of detecting malicious activity can be increased.
+
+--- gap_analysis ---
+{
+  "covered_techniques": [],
+  "missing_techniques": [],
+  "coverage_percentage": "0.0%"
+}

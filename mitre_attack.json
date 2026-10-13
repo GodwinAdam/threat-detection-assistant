@@ -1,0 +1,17 @@
+[
+  {"id": "T1059.001", "name": "PowerShell", "desc": "Adversaries may use PowerShell to perform actions like command execution and script running, often with encoded or obfuscated command lines to evade detection."},
+  {"id": "T1053.005", "name": "Scheduled Task", "desc": "Adversaries may abuse the Windows Task Scheduler to perform task scheduling for initial or persistent execution of malicious code."},
+  {"id": "T1003.001", "name": "LSASS Memory", "desc": "Adversaries may attempt to access credentials by dumping LSASS process memory to harvest cached credentials for lateral movement."},
+  {"id": "T1070.001", "name": "Clear Windows Event Logs", "desc": "Adversaries may clear Windows Event Logs to hide the activity of an intrusion, removing evidence of their operations."},
+  {"id": "T1027", "name": "Obfuscated Files or Information", "desc": "Adversaries may obfuscate content such as scripts, executables, or commands to make detection and analysis more difficult for defenders."},
+  {"id": "T1486", "name": "Data Encrypted for Impact", "desc": "Adversaries may encrypt data on target systems, such as in a ransomware attack, to interrupt availability and extort victims."},
+  {"id": "T1566.001", "name": "Spearphishing Attachment", "desc": "Adversaries may send spearphishing emails with a malicious attachment to gain initial access to a target's systems."},
+  {"id": "T1078", "name": "Valid Accounts", "desc": "Adversaries may obtain and abuse credentials of existing valid accounts to gain initial access, persistence, or escalate privileges while evading detection."},
+  {"id": "T1021.001", "name": "Remote Desktop Protocol", "desc": "Adversaries may use RDP with valid credentials to move laterally between systems in a network."},
+  {"id": "T1055", "name": "Process Injection", "desc": "Adversaries may inject malicious code into the address space of a separate live process to evade process-based defenses."},
+  {"id": "T1547.001", "name": "Registry Run Keys / Startup Folder", "desc": "Adversaries may add programs to registry run keys or the startup folder to establish persistence across reboots."},
+  {"id": "T1105", "name": "Ingress Tool Transfer", "desc": "Adversaries may transfer tools or other files from an external system into a compromised environment to carry out follow-on actions."},
+  {"id": "T1110", "name": "Brute Force", "desc": "Adversaries may use brute-force techniques to guess account credentials when password policies allow weak or reused passwords."},
+  {"id": "T1098", "name": "Account Manipulation", "desc": "Adversaries may manipulate accounts, such as adding permissions or credentials, to maintain persistent access to a target environment."},
+  {"id": "T1562.001", "name": "Disable or Modify Tools", "desc": "Adversaries may disable or modify security tools, such as antivirus or logging agents, to avoid detection of their activities."}
+]

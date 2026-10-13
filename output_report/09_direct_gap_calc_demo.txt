@@ -1,0 +1,18 @@
+SCENARIO: 09_direct_gap_calc_demo
+DESCRIPTION: Direct, deterministic call to sigma_tools.calculate_coverage_gap with a deliberately mismatched set, guaranteeing a visible gap (not dependent on LLM output).
+CLASSIFICATION: HIGH RISK / GAP FOUND (forced, deterministic demonstration)
+
+--- CALL ---
+calculate_coverage_gap(detected=['T1059.001'], target=['T1059.001','T1003.001','T1486'])
+
+--- OUTPUT ---
+{
+  "covered_techniques": [
+    "T1059.001"
+  ],
+  "missing_techniques": [
+    "T1003.001",
+    "T1486"
+  ],
+  "coverage_percentage": "33.33%"
+}

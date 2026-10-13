@@ -1,0 +1,89 @@
+SCENARIO: 01_good_coverage_synthetic
+DESCRIPTION: Synthetic rule whose declared ATT&CK tags are fully confirmed by the LLM's analysis.
+CALLER_ID: local-user
+CLASSIFICATION: POSITIVE / LOW RISK (good shape — full declared coverage confirmed)
+ELAPSED: 15.87s
+
+--- INPUT ---
+title: Suspicious PowerShell Command line Execution
+status: experimental
+tags:
+    - attack.t1059.001
+    - attack.t1053.005
+detection:
+    selection:
+        Image|endswith: '\powershell.exe'
+        CommandLine|contains:
+            - '-nop'
+            - '-w hidden'
+            - '-enc'
+    condition: selection
+
+--- OUTCOME ---
+COMPLETED
+
+--- parsed_metadata ---
+{
+  "title": "Suspicious PowerShell Command line Execution",
+  "status": "experimental",
+  "tags": [
+    "attack.t1059.001",
+    "attack.t1053.005"
+  ],
+  "detection": {
+    "selection": {
+      "Image|endswith": "\\powershell.exe",
+      "CommandLine|contains": [
+        "-nop",
+        "-w hidden",
+        "-enc"
+      ]
+    },
+    "condition": "selection"
+  },
+  "status_code": 200
+}
+
+--- final_report ---
+**Threat Detection Coverage Analysis**
+
+**1. Mapped MITRE ATT&CK Technique ID & Name:**
+
+The detection rule maps to the following MITRE ATT&CK techniques:
+
+* T1059.001 - PowerShell: Adversaries may use PowerShell to perform actions like command execution and script running, often with encoded or obfuscated command lines to evade detection.
+* T1053.005 - Scheduled Task: Adversaries may abuse the Windows Task Scheduler to perform task scheduling for initial or persistent execution of malicious code.
+
+The rule is focused on detecting suspicious PowerShell command-line execution, which is a key indicator of potential PowerShell-based attacks.
+
+**2. Blind spots or evasion techniques attackers could use against this rule:**
+
+While the rule is effective in detecting some PowerShell-based attacks, there are potential blind spots and evasion techniques attackers could use to evade detection:
+
+* **Encoded or obfuscated command lines:** Attackers can use PowerShell's built-in encoding and obfuscation features to conceal malicious command lines. The rule only checks for specific keywords, which may not cover all possible encoding and obfuscation techniques.
+* **Alternative PowerShell execution methods:** Attackers can use alternative methods to execute PowerShell, such as using the `powershell.exe` file directly or using other tools like `powershell_core.exe` or `pwsh.exe`.
+* **Scheduled Task evasion:** Attackers can use scheduled tasks to execute malicious code at a later time, making it harder to detect.
+* **Command-line argument evasion:** Attackers can use command-line arguments that are not explicitly listed in the rule, such as using quotes or escaping special characters.
+
+**3. Actionable recommendations to improve detection coverage:**
+
+To improve detection coverage, consider the following recommendations:
+
+* **Expand keyword-based detection:** Include additional keywords and patterns that may indicate PowerShell-based attacks, such as `Invoke-Expression`, `Invoke-Command`, or `New-Object`.
+* **Use behavioral analysis:** Implement behavioral analysis to detect suspicious PowerShell activity, such as unusual command-line arguments or execution patterns.
+* **Monitor alternative PowerShell execution methods:** Monitor for alternative PowerShell execution methods, such as using the `powershell.exe` file directly or using other tools like `powershell_core.exe` or `pwsh.exe`.
+* **Enhance scheduled task monitoring:** Monitor scheduled tasks for suspicious activity, such as tasks created with unusual names or execution patterns.
+* **Implement anomaly-based detection:** Implement anomaly-based detection to identify unusual command-line arguments or execution patterns that may indicate a potential attack.
+* **Continuously update and refine the rule:** Continuously update and refine the rule to stay ahead of emerging threats and evasion techniques.
+
+By implementing these recommendations, you can improve the detection coverage of the rule and reduce the risk of missing potential PowerShell-based attacks.
+
+--- gap_analysis ---
+{
+  "covered_techniques": [
+    "T1053.005",
+    "T1059.001"
+  ],
+  "missing_techniques": [],
+  "coverage_percentage": "100.0%"
+}

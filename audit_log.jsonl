@@ -1,0 +1,16 @@
+{"ts": "2026-10-13T06:00:40.355130+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T14:19:26.764814+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T14:30:45.482359+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T14:31:01.957833+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T14:31:14.428004+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T15:20:39.632900+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T15:20:55.476319+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T15:21:07.440549+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T15:21:20.602160+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T15:21:34.373003+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T15:21:45.581194+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T15:21:45.582093+00:00", "event": "input_blocked", "detail": "matched injection term: 'ignore previous instructions'"}
+{"ts": "2026-10-13T15:21:45.624913+00:00", "event": "authz_check", "detail": "caller='local-user' allowed=True (no allow-list configured)"}
+{"ts": "2026-10-13T15:21:45.629827+00:00", "event": "input_redacted", "detail": "pattern matched 1 time(s): (?i)api[_-]?key\\s*[:=]\\s*['\\\"]?[A-Za-z0-9_\\-]{16,}['\\\"]?"}
+{"ts": "2026-10-13T15:21:45.634085+00:00", "event": "input_redacted", "detail": "pattern matched 1 time(s): \\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b"}
+{"ts": "2026-10-13T15:21:56.669829+00:00", "event": "authz_check", "detail": "caller='unknown-caller' allowed=False"}
